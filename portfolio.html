@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J Karthik Raj — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1117;
+    --surface:#161B22;
+    --surface2:#1C2330;
+    --border:#2A323D;
+    --text:#C9D1D9;
+    --text-dim:#8B949E;
+    --green:#58E6A2;
+    --amber:#E3B341;
+    --mono:'JetBrains Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+  }
+  ::selection{background:var(--green);color:#04342C;}
+
+  a{color:var(--green);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  .container{max-width:880px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(13,17,23,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .container{
+    display:flex;align-items:center;justify-content:space-between;
+    height:60px;
+  }
+  nav .logo{
+    font-family:var(--mono);font-weight:700;color:var(--green);font-size:15px;
+  }
+  nav .links{display:flex;gap:28px;}
+  nav .links a{
+    font-family:var(--mono);font-size:13px;color:var(--text-dim);
+  }
+  nav .links a:hover{color:var(--green);text-decoration:none;}
+  nav .links a::before{content:"";}
+
+  /* HERO */
+  .hero{padding:90px 0 70px;}
+  .terminal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 20px 60px -30px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex;align-items:center;gap:8px;
+    padding:10px 14px;
+    border-bottom:1px solid var(--border);
+    background:var(--surface2);
+  }
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .dot.r{background:#FF5F56;}
+  .dot.y{background:#FFBD2E;}
+  .dot.g{background:#27C93F;}
+  .terminal-title{
+    margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--text-dim);
+  }
+  .terminal-body{
+    padding:24px 28px 30px;
+    font-family:var(--mono);
+    font-size:14px;
+  }
+  .terminal-body .line{margin-bottom:6px;color:var(--text-dim);}
+  .terminal-body .prompt{color:var(--green);}
+  .terminal-body .path{color:var(--amber);}
+  .terminal-body h1{
+    font-size:34px;
+    font-family:var(--mono);
+    font-weight:700;
+    color:var(--text);
+    margin:14px 0 6px;
+    letter-spacing:-0.5px;
+  }
+  .terminal-body .role{
+    color:var(--green);font-size:16px;margin-bottom:14px;
+  }
+  .terminal-body .desc{
+    color:var(--text-dim);font-family:var(--sans);font-size:15px;
+    max-width:520px;margin-bottom:18px;
+  }
+  .cursor{
+    display:inline-block;width:9px;height:18px;
+    background:var(--green);
+    animation:blink 1s steps(1) infinite;
+    vertical-align:text-bottom;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-links{display:flex;gap:14px;margin-top:6px;flex-wrap:wrap;}
+  .hero-links a{
+    font-family:var(--mono);font-size:13px;
+    border:1px solid var(--border);
+    padding:7px 14px;border-radius:6px;
+    color:var(--text);
+    transition:border-color .15s, color .15s;
+  }
+  .hero-links a:hover{
+    border-color:var(--green);color:var(--green);text-decoration:none;
+  }
+
+  /* SECTION HEADERS */
+  section{padding:50px 0;}
+  .section-label{
+    font-family:var(--mono);font-size:13px;color:var(--text-dim);
+    margin-bottom:8px;
+  }
+  .section-label::before{content:"// ";color:var(--green);}
+  h2{
+    font-family:var(--mono);font-size:24px;font-weight:700;
+    margin-bottom:28px;color:var(--text);
+  }
+
+  /* PROJECTS */
+  .project{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:24px 26px;
+    margin-bottom:18px;
+    transition:border-color .15s, transform .15s;
+  }
+  .project:hover{border-color:var(--green);transform:translateY(-2px);}
+  .project-head{
+    display:flex;align-items:baseline;justify-content:space-between;
+    flex-wrap:wrap;gap:8px;margin-bottom:10px;
+  }
+  .project-title{
+    font-family:var(--mono);font-size:17px;font-weight:700;color:var(--text);
+  }
+  .project-links{display:flex;gap:14px;font-family:var(--mono);font-size:12px;}
+  .project ul{
+    list-style:none;color:var(--text-dim);font-size:14px;
+  }
+  .project ul li{
+    padding-left:18px;position:relative;margin-bottom:6px;
+  }
+  .project ul li::before{
+    content:"›";position:absolute;left:0;color:var(--green);font-weight:700;
+  }
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .tag{
+    font-family:var(--mono);font-size:11px;color:var(--amber);
+    background:rgba(227,179,65,0.08);
+    border:1px solid rgba(227,179,65,0.25);
+    padding:3px 9px;border-radius:4px;
+  }
+
+  /* SKILLS */
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:16px;
+  }
+  .skill-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:8px;padding:18px 20px;
+  }
+  .skill-card h3{
+    font-family:var(--mono);font-size:13px;color:var(--green);
+    margin-bottom:10px;font-weight:700;
+    text-transform:lowercase;
+  }
+  .skill-card .items{
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  .skill-card .item{
+    font-family:var(--mono);font-size:12.5px;color:var(--text);
+    background:var(--surface2);
+    border:1px solid var(--border);
+    padding:4px 10px;border-radius:4px;
+  }
+
+  /* EDUCATION / CERTS */
+  .card-row{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:8px;padding:20px 24px;margin-bottom:14px;
+    display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;
+  }
+  .card-row .left h3{
+    font-family:var(--mono);font-size:15px;color:var(--text);font-weight:700;
+  }
+  .card-row .left p{color:var(--text-dim);font-size:13.5px;margin-top:4px;}
+  .card-row .right{
+    font-family:var(--mono);font-size:12px;color:var(--amber);
+    white-space:nowrap;
+  }
+
+  /* LANGUAGES */
+  .lang-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .lang-pill{
+    font-family:var(--mono);font-size:12.5px;color:var(--text);
+    border:1px solid var(--border);border-radius:20px;
+    padding:6px 16px;
+  }
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--border);
+    padding:30px 0;margin-top:30px;
+    text-align:center;
+  }
+  footer p{
+    font-family:var(--mono);font-size:12.5px;color:var(--text-dim);
+  }
+  footer .prompt{color:var(--green);}
+
+  @media(max-width:600px){
+    nav .links{gap:14px;}
+    .terminal-body h1{font-size:26px;}
+    .terminal-body{padding:18px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">~/karthik</div>
+    <div class="links">
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#education">education</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span class="terminal-title">karthik@portfolio: ~</span>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$</span> whoami</div>
+        <h1>J Karthik Raj</h1>
+        <div class="role">B.Tech CSE student · ML / Blockchain / Systems</div>
+        <div class="line"><span class="prompt">$</span> cat about.txt</div>
+        <p class="desc">
+          Building things across the stack — from training ML models on real-world data
+          to writing FHE-encrypted smart contracts. Currently a 2nd semester CSE student
+          at REVA University, Bengaluru, exploring machine learning, blockchain, and IoT.
+          <span class="cursor"></span>
+        </p>
+        <div class="hero-links">
+          <a href="https://github.com/jkarthikraj2007" target="_blank">github</a>
+          <a href="https://www.linkedin.com/in/j-karthik-raj-0a6110385" target="_blank">linkedin</a>
+          <a href="mailto:rajkarthik622@gmail.com">email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-label">featured work</div>
+    <h2>projects</h2>
+
+    <div class="project">
+      <div class="project-head">
+        <div class="project-title">Flight Price Predictor</div>
+        <div class="project-links">
+          <a href="https://github.com/jkarthikraj2007/flight-price-predictor" target="_blank">source</a>
+          <a href="https://flight-price-predictor-kig.streamlit.app" target="_blank">live demo</a>
+        </div>
+      </div>
+      <ul>
+        <li>End-to-end ML pipeline that predicts flight ticket prices using exploratory data analysis and regression models.</li>
+        <li>Deployed on Streamlit Cloud, working through real dependency and deployment hurdles along the way.</li>
+        <li>Exploring extensions: tier-2 Indian city coverage and live data via the Amadeus flight API.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">python</span>
+        <span class="tag">pandas</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">streamlit</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div class="project-title">ConfidentialVault</div>
+        <div class="project-links">
+          <a href="https://github.com/jkarthikraj2007" target="_blank">source</a>
+        </div>
+      </div>
+      <ul>
+        <li>Hardhat-based Solidity project using the Fhenix/CoFHE framework for fully homomorphic encryption (FHE) on-chain.</li>
+        <li>Resolved environment, contract-test mismatches, and dependency issues to get a fully passing test suite.</li>
+        <li>Worked through Sepolia testnet deployment, including Infura API and RPC configuration.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">solidity</span>
+        <span class="tag">hardhat</span>
+        <span class="tag">fhenix / cofhe</span>
+        <span class="tag">sepolia</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div class="project-title">Shardeum-Kit</div>
+        <div class="project-links">
+          <a href="https://github.com/jkarthikraj2007" target="_blank">source</a>
+        </div>
+      </div>
+      <ul>
+        <li>Hardhat project built for the Shardeum network — hackathon entry covering ERC-20 and SimpleStorage contracts.</li>
+        <li>Includes a frontend UI plus deploy/interaction scripts for the contracts.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">solidity</span>
+        <span class="tag">hardhat</span>
+        <span class="tag">shardeum</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div class="project-title">Smart Water Level Monitoring (IoT)</div>
+      </div>
+      <ul>
+        <li>IoT system to monitor water tank levels in real time using sensor-based hardware integration.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">iot</span>
+        <span class="tag">embedded systems</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label">tech stack</div>
+    <h2>skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>languages</h3>
+        <div class="items">
+          <span class="item">C</span>
+          <span class="item">C++</span>
+          <span class="item">Python</span>
+          <span class="item">JavaScript</span>
+          <span class="item">CSS</span>
+          <span class="item">Solidity</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>tools & frameworks</h3>
+        <div class="items">
+          <span class="item">Hardhat</span>
+          <span class="item">NumPy</span>
+          <span class="item">Streamlit</span>
+          <span class="item">Git / GitHub</span>
+          <span class="item">Fhenix / CoFHE</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>domains</h3>
+        <div class="items">
+          <span class="item">Machine Learning</span>
+          <span class="item">Data Analysis</span>
+          <span class="item">Blockchain</span>
+          <span class="item">IoT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-label">background</div>
+    <h2>education & certifications</h2>
+
+    <div class="card-row">
+      <div class="left">
+        <h3>REVA University, Bengaluru</h3>
+        <p>B.Tech in Computer Science and Information Technology</p>
+      </div>
+      <div class="right">2nd semester · ongoing</div>
+    </div>
+
+    <div class="card-row">
+      <div class="left">
+        <h3>Python for Data Science</h3>
+        <p>IBM — course completion certificate</p>
+      </div>
+      <div class="right">certification</div>
+    </div>
+
+    <div class="card-row">
+      <div class="left">
+        <h3>Shardeum Blockchain Hackathon</h3>
+        <p>Built and demoed the shardeum-kit project</p>
+      </div>
+      <div class="right">hackathon</div>
+    </div>
+
+    <div style="margin-top:30px;">
+      <div class="section-label">spoken languages</div>
+      <div class="lang-row">
+        <span class="lang-pill">Tamil</span>
+        <span class="lang-pill">Kannada</span>
+        <span class="lang-pill">English</span>
+        <span class="lang-pill">Hindi</span>
+        <span class="lang-pill">Telugu</span>
+        <span class="lang-pill">Malayalam</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <p><span class="prompt">$</span> contact --email rajkarthik622@gmail.com --phone +91-9380867769 --location Bengaluru,IN</p>
+  </div>
+</footer>
+
+</body>
+</html>
