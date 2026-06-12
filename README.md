@@ -125,7 +125,7 @@ gcc editor.c -o editor
 
 ## Author
 
-Your Name
+J Karthik Raj
 
 ## License
 
